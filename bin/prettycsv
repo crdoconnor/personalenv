@@ -1,0 +1,38 @@
+#!/usr/bin/python
+import sys
+
+if len(sys.argv) < 2:
+    print "prettycsv FILE [startcol endcol]"
+    exit(1)
+
+startcol = -1
+endcol = 99
+if len(sys.argv) > 3:
+    startcol = int(sys.argv[2])
+    endcol = int(sys.argv[3])
+
+    
+columnlengths = {}
+
+with open(sys.argv[1], 'r') as columnfile:
+    for lineread in columnfile:
+        line = lineread.replace("\n", "").replace("\r", "")
+        
+        i = 0
+        for col in line.split(","):
+            i = i + 1
+            if i not in columnlengths:
+                columnlengths[i] = len(col)
+            else:
+                if columnlengths[i] < len(col):
+                    columnlengths[i] = len(col)
+
+with open(sys.argv[1], 'r') as columnfile:
+    for lineread in columnfile:
+        line = lineread.replace("\n", "").replace("\r", "")
+        i = 0
+        for col in line.split(","):
+            i = i + 1
+            if i >= startcol and i <= endcol:
+                print col.center(columnlengths[i]),
+        print ""

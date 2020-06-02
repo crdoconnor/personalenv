@@ -1,0 +1,3 @@
+#!/bin/bash
+#ack-grep $@ -i --ignore-dir venv --ignore-dir build --ignore-dir cache --color --heading --break | cut -c 1-190
+/usr/bin/ag -iC 5 $@ --color --heading --break | cut -c 1-190

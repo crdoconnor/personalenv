@@ -1,0 +1,6 @@
+$@
+EXITCODE=$?
+until [ $EXITCODE -eq 0 ]; do
+   sleep 5
+   $@
+done

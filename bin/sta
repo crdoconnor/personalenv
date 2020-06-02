@@ -1,0 +1,2 @@
+#!/bin/bash
+op $(git status -s | awk '{print $2}' | tr '\n' ' ')

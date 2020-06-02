@@ -1,0 +1,7 @@
+#!/bin/bash
+reset
+STRING=$@
+SCRIPTSDIR=$(cd `dirname $0` && pwd)
+SEARCH=$(echo $@ | sed 's/ /\\s/g')
+echo Searching for $SEARCH...
+$SCRIPTSDIR/ack $SEARCH

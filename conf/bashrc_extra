@@ -1,0 +1,124 @@
+PERSONALENV=$HOME/deskenv
+PROMPT_COMMAND='history -a'
+EDITOR='kate'
+VISUAL='kate'
+HISTSIZE=9000000
+HISTFILESIZE=90000000
+
+if [ -d "$HOME/bin" ]; then export PATH=$PATH:$HOME/bin; fi
+if [ -d "$PERSONALENV/bin" ]; then export PATH=$PATH:$PERSONALENV/bin; fi
+if [ -d "$HOME/filofax/scripts" ]; then export PATH=$PATH:$HOME/filofax/scripts; fi
+if [ -d "/usr/local/heroku/bin" ]; then export PATH=$PATH:/usr/local/heroku/bin; fi
+if [ -d "$HOME/.local/bin" ]; then export PATH=$HOME/.local/bin:$PATH; fi
+if [ -d "$HOME/.pyenv/bin" ]; then export PATH=$HOME/.pyenv/bin:$PATH; fi
+if [ -d "$HOME/.cargo/bin" ]; then export PATH=$HOME/.cargo/bin:$PATH; fi
+if [ -d "/usr/lib/chromium-browser/" ]; then export PATH=/usr/lib/chromium-browser/:$PATH; fi
+
+alias l='ls -lha --color=auto'
+alias ga='git add $@'
+alias gc='git commit -m $1'
+alias gac='git add . ; git commit -m $1'
+alias push='git push origin'
+alias pull='git pull origin'
+alias psa='ps aux | grep'
+alias branch='git branch'
+alias log='git log'
+alias co='git checkout'
+alias gd='git diff $@'
+alias gg='git branch -a | grep'
+alias ag='sudo apt-get install'
+alias yi='sudo yum install'
+alias ys='yum search'
+alias ap='apt-cache show'
+alias cx='chmod +x'
+alias p8='ping 1.1.1.1'
+alias p1='ping 1.1.1.1'
+alias dud='du -h --max-depth=1'
+alias cd..='cd ../'
+alias cd...='cd ../../'
+alias ..='cd ../'
+alias ...='cd ../../'
+alias ....='cd ../../../'
+alias .....='cd ../../../../'
+alias ......='cd ../../../../../'
+alias .......='cd ../../../../../../'
+alias ........='cd ../../../../../../../'
+alias .........='cd ../../../../../../../../'
+alias bdd='hk bdd $@'
+alias rbdd='hk rbdd $@'
+alias reg='hk regression'
+alias lint='hk lint'
+alias stash='git stash -k -u'
+alias unstash='git stash pop'
+alias r='reset'
+alias lastcommit='git show HEAD^..HEAD'
+alias th='thunar .'
+alias git-tickets='git status -b | git log master..$1 --pretty=oneline | perl -ne '"'"'{ /(\w+)-(\d+)/ && print "$1-$2,\n" }'"'"' | sort | uniq'
+alias s='git status'
+alias k='kate'
+
+
+extract () {
+  if [ -f $1 ] ; then
+      case $1 in
+          *.tar.bz2)   tar xvjf "$1"    ;;
+          *.tar.gz)    tar xvzf "$1"    ;;
+          *.bz2)       bunzip2 "$1"     ;;
+          *.rar)       rar x "$1"       ;;
+          *.gz)        gunzip "$1"      ;;
+          *.tar)       tar xvf "$1"     ;;
+          *.tbz2)      tar xvjf "$1"    ;;
+          *.tgz)       tar xvzf "$1"    ;;
+          *.zip)       unzip "$1"       ;;
+          *.Z)         uncompress "$1"  ;;
+          *.7z)        7z e "$1"        ;;
+          *.tar.xz)    tar xvfJ "$1"    ;;
+          *)           echo "don't know how to extract '$1'..." ;;
+      esac
+  else
+      echo "'$1' is not a valid file!"
+  fi
+}
+
+c () {
+  cd $(fastcd.py $@)
+}
+
+-() { 
+  cd - 
+}
+
+--() {
+  cd --
+}
+
+---() {
+  cd ---
+}
+
+----() {
+  cd ----
+}
+
+t() {
+  tail -n 50 $1
+  tail -F $1
+}
+
+=() {
+    calc="$@"
+    # Uncomment the below for (p → +) and (x → *)
+    #calc="${calc//p/+}"
+    #calc="${calc//x/*}"
+    echo -ne "$calc\n quit" | gcalccmd | sed 's:^> ::g'
+}
+
+function play {
+     youtube-dl --default-search=ytsearch: \
+                --youtube-skip-dash-manifest \
+                --output="${TMPDIR:-/tmp/}%(title)-s%(id)s.%(ext)s" \
+                --restrict-filenames \
+                --format="bestaudio[ext!=webm]" \
+                --exec=mplayer -vvv "$*"
+}
+

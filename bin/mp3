@@ -1,0 +1,4 @@
+#!/bin/bash
+notify-send "Downloading mp3..."
+youtube.sh $(xclip -out)
+notify-send "Done..."
