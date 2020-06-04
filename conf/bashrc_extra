@@ -1,4 +1,4 @@
-PERSONALENV=$HOME/deskenv
+PERSONALENV=$HOME/personalenv
 PROMPT_COMMAND='history -a'
 EDITOR='kate'
 VISUAL='kate'
