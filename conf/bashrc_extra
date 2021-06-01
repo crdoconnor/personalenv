@@ -57,6 +57,12 @@ alias th='thunar .'
 alias git-tickets='git status -b | git log master..$1 --pretty=oneline | perl -ne '"'"'{ /(\w+)-(\d+)/ && print "$1-$2,\n" }'"'"' | sort | uniq'
 alias s='git status'
 alias k='kate'
+alias dps='docker ps'
+alias dstop='docker kill $(docker ps -q)'
+alias dcstop='docker-compose stop'
+alias dc='docker-compose'
+alias dr='docker-compose run --rm'
+alias dlock='docker-compose --run lock-requirements ; docker-compose build'
 
 
 extract () {
