@@ -108,16 +108,13 @@ c () {
 }
 
 t() {
-  tail -n 50 $1
-  tail -F $1
+    tail -n 50 $1
+    tail -F $1
 }
 
 =() {
-    calc="$@"
-    # Uncomment the below for (p → +) and (x → *)
-    #calc="${calc//p/+}"
-    #calc="${calc//x/*}"
-    echo -ne "$calc\n quit" | gcalccmd | sed 's:^> ::g'
+    FORMULA=$@
+    awk "BEGIN {print $FORMULA}"
 }
 
 function play {
